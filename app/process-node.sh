@@ -27,7 +27,9 @@ process_node_stop()
 {
     heading "Stopping..."
     parse_node_args "$@"
-    uid=$(forever list | grep app.js | cut -c24-27) && forever stop $uid
+    for uid in $(forever list | grep app.js | egrep -v "STOPPED" | cut -c24-27); do
+        forever stop $uid || true;
+    done
     success "Stop OK!"
 }
 
