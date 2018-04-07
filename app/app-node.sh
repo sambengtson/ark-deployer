@@ -49,6 +49,11 @@ app_install_node()
 
     createdb "$DATABASE_NAME"
 
+    sudo service ntp stop
+    sudo ntpd -gq
+    sleep 2
+    sudo service ntp start
+
     rm -rf "$BRIDGECHAIN_PATH"
     git clone https://github.com/ArkEcosystem/ark-node.git -b explorer "$BRIDGECHAIN_PATH"
     cd "$BRIDGECHAIN_PATH"
