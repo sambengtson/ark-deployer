@@ -28,7 +28,7 @@ check_program_dependencies()
         if [[ "$choice" =~ ^(yes|y) || "$INSTALL_DEPS" == "Y" ]]; then
             success "Installing Program Dependencies..."
             if [[ "$machine" == "Linux" ]]; then
-                sudo sh -c "sudo apt-get install ${TO_INSTALL} -y"
+                sh -c "apt-get install ${TO_INSTALL} -y"
             elif [[ "$machine" == "Mac" ]]; then
                 sh -c "brew install ${TO_INSTALL} -y"
             else
@@ -89,7 +89,7 @@ check_process_dependencies()
 
             if [[ "$choice" =~ ^(yes|y) ]]; then
                 success "Starting ${dependency}..."
-                sudo service "${dependency}" start
+                service "${dependency}" start
                 success 'Start OK!'
             else
                 abort 1 "Please ensure that [${dependency}] is running and try again."
